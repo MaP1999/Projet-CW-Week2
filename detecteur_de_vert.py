@@ -62,6 +62,8 @@ while True:
         #Il suffit de faire echap pour fermer les fenetres
         cv.destroyAllWindows()
         break
+        
+#Corrigé et commenté par Marvin
     
 
  
