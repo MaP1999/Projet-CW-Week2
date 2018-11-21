@@ -1,14 +1,12 @@
 import cv2
 import numpy as np
-from pynput.mouse import Button, Controller
-import wx
 
-lowerBound=np.array([33,80,40])
-upperBound=np.array([102,255,255])
+lowerBound=np.array([320,80,40])
+upperBound=np.array([342,255,255])
 
 cam= cv2.VideoCapture(0)
 kernelOpen=np.ones((5,5))
-kernelClose=np.ones((20,20))
+kernelClose=np.ones((20,20)
 
 font = cv2.FONT_HERSHEY_SIMPLEX
 
@@ -32,14 +30,10 @@ while True:
         x,y,w,h=cv2.boundingRect(conts[i])
         cv2.rectangle(img,(x,y),(x+w,y+h),(0,0,255), 2)
         #cv2.putText(img,, str(i+1),,font,(0,255,255))
-        cv2.putText(img,str(i+1),(x,(y+h)), font, 2,(0,255,255),1,cv2.LINE_AA)
+        cv2.putText(img,'OpenCV',(x,(y+h)), font, 2,(0,255,255),1,cv2.LINE_AA)
     cv2.imshow("maskClose",maskClose)
     cv2.imshow("maskOpen",maskOpen)
     cv2.imshow("mask",mask)
     cv2.imshow("cam",img)
     cv2.waitKey(1)
     #cv2.destroyAllWindows()
-mouse=Controller()
-app=wx.App(False)
-(sx,sy)=wx.GetDisplaySize()
-(camx,camy)=(320,240)
