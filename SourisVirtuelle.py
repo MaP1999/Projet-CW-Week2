@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 from pynput.mouse import Button, Controller
 import wx
+import time as tm
 
 mouse=Controller()
 app=wx.App(False)
@@ -12,17 +13,17 @@ app=wx.App(False)
 ##On définit les limites inf et sup d'accéptation pour le vert en HSV
 
 #Il faut d'abord importer le code pyhton contenu dans le fichier reconnaissance_de_couleur !!!
-lc1,hc1=regarde_la_couleur()
-lc2,hc2=regarde_la_couleur()
+#lc1,hc1=regarde_la_couleur()
+#lc2,hc2=regarde_la_couleur()
 
-lowerBound1 = np.array(lc1)
-upperBound1 = np.array(hc1)
-lowerBound2 = np.array(lc2)
-upperBound2 = np.array(hc2)
+#lowerBound1 = np.array(lc1)
+#upperBound1 = np.array(hc1)
+#lowerBound2 = np.array(lc2)
+#upperBound2 = np.array(hc2)
 
 
-# lowerBound = np.array([33, 100, 40])
-# upperBound = np.array([102, 255, 255])
+lowerBound = np.array([33, 100, 40])
+upperBound = np.array([102, 255, 255])
 # vert clair
 
 # lowerBound = np.array([56, 133, 95])
@@ -139,3 +140,5 @@ while True:
     #cv2.imshow("mask", mask)
     cv2.imshow("cam", img)
     cv2.waitKey(5)
+
+

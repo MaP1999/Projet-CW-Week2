@@ -2,7 +2,10 @@ import cv2
 import numpy as np
 import time as tm
 
-
+#Description: va calibrer la couleur que l'on veut utiliser pour controller la souris/ la couleur du curseur
+# Une fois lancé, on doit montrer la couleur au centre de la croix, ensuite appuyer sur esc tout en montrant la couleur pendant 3sec
+#in: /
+#out: Upperbound et Lowerbound de la couleur du curseur
 
 def regarde_la_couleur():
     #On va regarder la couleur que l'on veut utiliser pour controller la souris
