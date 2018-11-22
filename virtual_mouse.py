@@ -16,7 +16,7 @@ app=wx.App(False)
 (sx,sy)=wx.GetDisplaySize()
 (camx,camy)=(320,240)
 
-couleur="calib"
+couleur="vert"
 #variable qui choisit entre calibration et couleur vert de base
 if couleur=="vert":
     lowerBound = np.array([33, 100, 40])
