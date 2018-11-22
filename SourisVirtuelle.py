@@ -8,9 +8,11 @@ app=wx.App(False)
 (sx,sy)=wx.GetDisplaySize()
 (camx,camy)=(320,240)
 
-lowerBound = np.array([33, 100, 40])
-upperBound = np.array([102, 255, 255])
+lowerBound1 = np.array([33, 100, 40])
+upperBound1 = np.array([102, 255, 255])
 #On définit les limites inf et sup d'accéptation pour le vert en HSV
+lowerBound2 = np.array([2, 133, 151])
+upperBound2 = np.array([9, 255, 255])
 
 
 cam = cv2.VideoCapture(1)
@@ -35,19 +37,24 @@ while True:
     # On créé maintenant les différent mask pour l'image (un mask est une autre image (de meme dimension) avec du blanc
     # là où la couleur est détéctée et du noir sur le reste)
 
-    mask = cv2.inRange(imgHSV, lowerBound, upperBound)
+    mask = cv2.inRange(imgHSV, lowerBound1, upperBound1)
     #Premier mask qui détécte "betement" le vert
+    mask2 = cv2.inRange(imgHSV,lowerBound2,upperBound2)
 
     maskOpen = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernelOpen)
     # maskOpen est le premier mask sur lequel on a retiré le bruit (càd les petits point random)
+    maskOpen2 = cv2.morphologyEx(mask2, cv2.MORPH_OPEN, kernelOpen)
 
     maskClose = cv2.morphologyEx(maskOpen, cv2.MORPH_CLOSE, kernelClose)
     # maskClose c'est maskOpen sur lequel les objets sont "remplis" (càd lorsqu'un objet à du bruit à l'intérieur (des
     # points où du vert n'est pas détécté à tord) les bruits sont dégagés)
+    maskClose2 = cv2.morphologyEx(maskOpen2, cv2.MORPH_CLOSE,kernelClose)
 
     maskFinal = maskClose
     _,conts,h = cv2.findContours(maskFinal.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
     #conts c'est la liste des points du contour de chaque objet vert donc len(conts) c'est le lombre d'objets détéctés)
+    maskFinal2 = maskClose2
+    _, conts2,_ = cv2.findContours(maskFinal2.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 
 
     if(len(conts)==2):
@@ -56,18 +63,17 @@ while True:
         # renvoie, pour le plus petit rectangle "non penché" contenant tous les points des deux rectangles détectés,
         # les cordonnées du coin inférieur gauche (x,y) et le couple (w,h) tel que (x+w,y+h) soit les cordonnées du coin
         # supérieur droit
-
         cv2.rectangle(img, (x1, y1), (x1 + w1, y1 + h1), (255, 0, 0), 2)
         cv2.rectangle(img, (x2, y2), (x2 + w2, y2 + h2), (255, 0, 0), 2)
         #Dessine les deux rectangles dans la couleur (0,0,255)
-
+    
         # renvoie, pour le plus petit rectangle "non penché" contenant tous les points des deux rectangles détectés,
         # les cordonnées du coin inférieur gauche (x,y) et le couple (w,h) tel que (x+w,y+h) soit les cordonnées du coin
         # supérieur droit
 
         cx1=int(x1+w1/2)
         cy1=int(y1+h1/2)
-        #
+            #
         cx2=int(x2+w2/2)
         cy2=int(y2+h2/2)
         #cntre coordinate of the line connection both points
@@ -85,6 +91,10 @@ while True:
         while mouse.position!=mouseLoc:
             pass
 
+        if (len(conts2)==1):
+            mouse.click(Button.left,2)
+
+
     elif(len(conts)==1):
         x, y, w, h = cv2.boundingRect(conts[0])
         if (pinchFlag==0):
@@ -97,7 +107,7 @@ while True:
         r=int((w+h)/4)
         cv2.circle(img,(cx,cy),r,(0, 0, 255), 2)
 
-        mouse.press(Button.left)
+    
         mouseLoc = (int(sx - (cx * sx / camx)), int(cy * sy / camy))
         mouse.position = mouseLoc
         while mouse.position != mouseLoc:
