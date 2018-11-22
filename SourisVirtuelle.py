@@ -12,8 +12,13 @@ app=wx.App(False)
 ##On définit les limites inf et sup d'accéptation pour le vert en HSV
 
 #Il faut d'abord importer le code pyhton contenu dans le fichier reconnaissance_de_couleur !!!
-lowerBound=np.array([33,80,40])
-upperBound=np.array([102,255,255])
+lc1,hc1=regarde_la_couleur()
+lc2,hc2=regarde_la_couleur()
+
+lowerBound1 = np.array(lc1)
+upperBound1 = np.array(hc1)
+lowerBound2 = np.array(lc2)
+upperBound2 = np.array(hc2)
 
 
 # lowerBound = np.array([33, 100, 40])
@@ -121,6 +126,7 @@ while True:
         cy = int(y + h / 2)
         r=int((w+h)/4)
         cv2.circle(img,(cx,cy),r,(0, 0, 255), 2)
+
 
         mouseLoc = (int(sx - (cx * sx / camx)), int(cy * sy / camy))
         mouse.position = mouseLoc
