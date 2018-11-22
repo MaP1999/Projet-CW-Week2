@@ -8,11 +8,22 @@ app=wx.App(False)
 (sx,sy)=wx.GetDisplaySize()
 (camx,camy)=(320,240)
 
-lowerBound = np.array([33, 100, 40])
-upperBound = np.array([102, 255, 255])
+# lowerBound = np.array([33, 100, 40])
+# upperBound = np.array([102, 255, 255])
+# vert clair
 
+# lowerBound = np.array([56, 133, 95])
+# upperBound = np.array([107, 255, 191])
+# vert foncé
 
-cam = cv2.VideoCapture(1)
+c1,c2=regarde_la_couleur()
+lowerBound=np.array(c1)
+upperBound=np.array(c2)
+
+# lowerBound = np.array([56, 133, 95])
+# upperBound = np.array([107, 255, 191])
+
+cam = cv2.VideoCapture(0)
 cam.set(3,camx)
 cam.set(4,camy)
 kernelOpen = np.ones((5, 5))
