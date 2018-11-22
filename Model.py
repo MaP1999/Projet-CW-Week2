@@ -13,7 +13,7 @@ upperBound = np.array([102, 255, 255])
 #On définit les limites inf et sup d'accéptation pour le vert en HSV
 
 
-cam = cv2.VideoCapture(1)
+cam = cv2.VideoCapture(0)
 cam.set(3,camx)
 cam.set(4,camy)
 kernelOpen = np.ones((5, 5))
