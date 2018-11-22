@@ -8,14 +8,34 @@ app=wx.App(False)
 (sx,sy)=wx.GetDisplaySize()
 (camx,camy)=(320,240)
 
-lowerBound1 = np.array([33, 100, 40])
-upperBound1 = np.array([102, 255, 255])
-#On définit les limites inf et sup d'accéptation pour le vert en HSV
-lowerBound2 = np.array([2, 133, 151])
-upperBound2 = np.array([9, 255, 255])
+
+##On définit les limites inf et sup d'accéptation pour le vert en HSV
+
+#Il faut d'abord importer le code pyhton contenu dans le fichier reconnaissance_de_couleur !!!
+lc1,hc1=regarde_la_couleur()
+lc2,hc2=regarde_la_couleur()
+
+lowerBound1 = np.array(lc1)
+upperBound1 = np.array(hc1)
+lowerBound2 = np.array(lc2)
+upperBound2 = np.array(hc2)
 
 
-cam = cv2.VideoCapture(1)
+# lowerBound = np.array([33, 100, 40])
+# upperBound = np.array([102, 255, 255])
+# vert clair
+
+# lowerBound = np.array([56, 133, 95])
+# upperBound = np.array([107, 255, 191])
+# vert foncé
+
+# c1,c2=regarde_la_couleur()
+# lowerBound=np.array(c1)
+# upperBound=np.array(c2)
+
+##
+
+cam = cv2.VideoCapture(0)
 cam.set(3,camx)
 cam.set(4,camy)
 kernelOpen = np.ones((5, 5))
@@ -107,7 +127,10 @@ while True:
         r=int((w+h)/4)
         cv2.circle(img,(cx,cy),r,(0, 0, 255), 2)
 
+<<<<<<< HEAD
+=======
     
+>>>>>>> Marvin
         mouseLoc = (int(sx - (cx * sx / camx)), int(cy * sy / camy))
         mouse.position = mouseLoc
         while mouse.position != mouseLoc:
