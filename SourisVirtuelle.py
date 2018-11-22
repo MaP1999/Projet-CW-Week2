@@ -127,10 +127,7 @@ while True:
         r=int((w+h)/4)
         cv2.circle(img,(cx,cy),r,(0, 0, 255), 2)
 
-<<<<<<< HEAD
-=======
-    
->>>>>>> Marvin
+
         mouseLoc = (int(sx - (cx * sx / camx)), int(cy * sy / camy))
         mouse.position = mouseLoc
         while mouse.position != mouseLoc:
