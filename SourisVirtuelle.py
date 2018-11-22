@@ -13,7 +13,7 @@ upperBound = np.array([102, 255, 255])
 #On définit les limites inf et sup d'accéptation pour le vert en HSV
 
 
-cam = cv2.VideoCapture(1)
+cam = cv2.VideoCapture(0)
 cam.set(3,camx)
 cam.set(4,camy)
 kernelOpen = np.ones((5, 5))
@@ -97,7 +97,6 @@ while True:
         r=int((w+h)/4)
         cv2.circle(img,(cx,cy),r,(0, 0, 255), 2)
 
-        mouse.press(Button.left)
         mouseLoc = (int(sx - (cx * sx / camx)), int(cy * sy / camy))
         mouse.position = mouseLoc
         while mouse.position != mouseLoc:
