@@ -16,9 +16,18 @@ def regarde_la_couleur():
         
         img=cv2.resize(img,(340,220))
         #On donne une taille imposé au fenêtre
+        
+        for i in range (0,340):
+            img[109][i]=[0,0,0]
+            img[110][i]=[0,0,0]
+            
+        for i in range (0,220):
+            img[i][169]=[0,0,0]
+            img[i][170]=[0,0,0]
     
         cv2.imshow("cam",img)
         #Montre ce qu'il y a dans img (càd l'image de la webcam) avec les rectangles dessus
+        
         
         if cv2.waitKey(1) == 27:
             #Il suffit de faire echap pour fermer les fenetres
@@ -54,12 +63,12 @@ def regarde_la_couleur():
         V.append(couleur[2])
         #on fait des listes des valeurs possibles de H,S et V
          
-    hmin=int(min(H)*0.7)
-    smin=int(min(S)*0.7)
-    vmin=int(min(V)*0.7)
-    hmax=min(360,int(max(H)*1.3))
-    smax=min(255,int(max(S)*1.3))
-    vmax=min(255,int(max(V)*1.3))
+    hmin=int(min(H)*0.6)
+    smin=int(min(S)*0.6)
+    vmin=int(min(V)*0.6)
+    hmax=min(360,int(max(H)*1.4))
+    smax=min(255,int(max(S)*1.4))
+    vmax=min(255,int(max(V)*1.4))
     #on regarde les minimums et les maximums des listes H,S et V et on prend 10% de marges (pour les maximum on bornes évidements pas les valeurs maximales pouvant être prises)
     
     lowerBound=[hmin,smin,vmin]
