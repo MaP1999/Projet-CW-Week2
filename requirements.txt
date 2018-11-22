@@ -1,0 +1,6 @@
+numpy==1.15.4
+opencv-python==3.4.3.18
+pynput==1.4
+Pypubsub==4.0.0
+six==1.11.0
+wxPython==4.0.3

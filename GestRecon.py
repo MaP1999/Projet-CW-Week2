@@ -1,3 +1,4 @@
+#@
 import cv2
 import numpy as np
 from pynput.mouse import Button, Controller
@@ -8,11 +9,11 @@ app=wx.App(False)
 (sx,sy)=wx.GetDisplaySize()
 (camx,camy)=(320,240)
 
-lowerBound = np.array([33, 100, 40])
+lowerBound = np.array([33, 80, 40])
 upperBound = np.array([102, 255, 255])
 
 
-cam = cv2.VideoCapture(1)
+cam = cv2.VideoCapture(0)
 cam.set(3,camx)
 cam.set(4,camy)
 kernelOpen = np.ones((5, 5))
@@ -47,7 +48,7 @@ while True:
         #centre coordinate of second object
         cx2=int(x2+w2/2)
         cy2=int(y2+h2/2)
-        #cntre coordinate of the line connection both points
+        #centre coordinate of the line connection both points
         cx=int((cx1+cx2)/2)
         cy=int((cy1+cy2)/2)
         #Drawing the line
@@ -61,12 +62,15 @@ while True:
         mouse.position=mouseLoc
         while mouse.position!=mouseLoc:
             pass
+        if cv2.waitKey(1) == 27:
+            cv2.destroyAllWindows()
+            break
 
     elif(len(conts)==1):
         x, y, w, h = cv2.boundingRect(conts[0])
         if (pinchFlag==0):
             pinchFlag=1
-            mouse.press(Button.left)
+        mouse.press(Button.left)
         # drawing the rectangle
         cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
         cx = int(x + w / 2)
@@ -79,10 +83,13 @@ while True:
         mouse.position = mouseLoc
         while mouse.position != mouseLoc:
             pass
-
-
+        if cv2.waitKey(1) == 27:
+            cv2.destroyAllWindows()
+            break
     #cv2.imshow("maskClose", maskClose)
     #cv2.imshow("maskOpen", maskOpen)
     #cv2.imshow("mask", mask)
-    cv2.imshow("cam", img)
-    cv2.waitKey(5)
+    cv2.imshow("cam",img)
+    if cv2.waitKey(1) == 27:
+        cv2.destroyAllWindows()
+        break
