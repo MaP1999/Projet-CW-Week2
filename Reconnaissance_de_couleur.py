@@ -1,4 +1,4 @@
-import cv2 as cv
+import cv2
 import numpy as np
 import time as tm
 
@@ -7,22 +7,22 @@ import time as tm
 def regarde_la_couleur():
     #On va regarder la couleur que l'on veut utiliser pour controller la souris
         
-    cam= cv.VideoCapture(0)
+    cam= cv2.VideoCapture(0)
     #On met dans cam la direction de la webcam
     
     while True:
         _,img=cam.read()
         #On lit la webcam (l'image à chaque tour est dans img)
         
-        img=cv.resize(img,(340,220))
+        img=cv2.resize(img,(340,220))
         #On donne une taille imposé au fenêtre
     
-        cv.imshow("cam",img)
+        cv2.imshow("cam",img)
         #Montre ce qu'il y a dans img (càd l'image de la webcam) avec les rectangles dessus
         
-        if cv.waitKey(1) == 27:
+        if cv2.waitKey(1) == 27:
             #Il suffit de faire echap pour fermer les fenetres
-            cv.destroyAllWindows()
+            cv2.destroyAllWindows()
             break
     
     H=[]
@@ -37,10 +37,10 @@ def regarde_la_couleur():
         _,img=cam.read()
         #On lit la webcam (l'image à chaque tour est dans img)
         
-        img=cv.resize(img,(340,220))
+        img=cv2.resize(img,(340,220))
         #On donne une taille imposé à l'image
         
-        imgHSV= cv.cvtColor(img,cv.COLOR_BGR2HSV)
+        imgHSV= cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
         #on convertit l'image de RGB en HSV
         
         A=np.array(imgHSV, dtype=int)
