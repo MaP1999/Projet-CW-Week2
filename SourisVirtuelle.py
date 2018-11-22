@@ -11,7 +11,7 @@ app=wx.App(False)
 
 ##On définit les limites inf et sup d'accéptation pour le vert en HSV
 
-
+#Il faut d'abord importer le code pyhton contenu dans le fichier reconnaissance_de_couleur !!!
 lc1,hc1=regarde_la_couleur()
 lc2,hc2=regarde_la_couleur()
 
