@@ -16,7 +16,7 @@ app=wx.App(False)
 (sx,sy)=wx.GetDisplaySize()
 (camx,camy)=(320,240)
 
-couleur="vert"
+couleur="calib"
 #variable qui choisit entre calibration et couleur vert de base
 if couleur=="vert":
     lowerBound = np.array([33, 100, 40])
@@ -35,10 +35,8 @@ kernelClose = np.ones((20, 20))
 
 pinchFlag=0
 #variable pour garder clic gauche enfoncer
-nostop=True
-#variable pour arreter le programme
 
-while nostop:
+while True:
 
     ##PROPRETE DE LA RECONNAISSANCE DE COULEUR
 
@@ -72,7 +70,7 @@ while nostop:
 
     if(len(conts)==2):
         #deux curseur
-        cx,cy = draw.drawcont(img,conts,2)
+        cx,cy = draw.drawcont(img,conts)
         #dessine les contours
 
         if(pinchFlag==1):
@@ -84,12 +82,7 @@ while nostop:
         mouse.position=mouseLoc
 
         while mouse.position!=mouseLoc:
-            if cv2.waitKey(1) ==27:
-                nostop=False
             pass
-
-        if cv2.waitKey(1) ==27:
-            nostop=False
 
     ##SI ON A UN CURSEUR => CLIC GAUCHE ENFONCER
 
@@ -100,23 +93,19 @@ while nostop:
             mouse.press(Button.left)
         #stop le clic gauche
 
-        cx,cy = draw.drawcont(img,conts,1)
+        cx,cy = draw.drawcont(img,conts)
         mouseLoc = (int(sx - (cx * sx / camx)), int(cy * sy / camy))
         mouse.position = mouseLoc
         while mouse.position != mouseLoc:
-            if cv2.waitKey(1) ==27:
-                nostop=False
             pass
         #place la souris
-
-        if cv2.waitKey(1) ==27:
-            nostop=False
-
     cv2.imshow("cam", img)
-    if cv2.waitKey(1) ==27:
-        nostop=False
 
-cv2.destroyAllWindows()
+    if cv2.waitKey(100) ==27:
+        cv2.destroyAllWindows()
+        break
+
+
 
 
 
