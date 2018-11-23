@@ -5,11 +5,11 @@ import wx
 import Reconnaissance_de_couleur as rdc
 import draw_cont as draw
 
-#Description: Conctoler la souris du Rasberry avec la reconnaissance de un ou deux curseur: la création d'une souris virtuelle
+#Description: Controler la souris du Rasberry avec la reconnaissance de un ou deux curseur: la création d'une souris virtuelle
 #in: /
 #out:/
 
-##VARIABLE GLOBAL NECESSAIRE
+##VARIABLE GLOBALE NECESSAIRE
 
 mouse=Controller()
 app=wx.App(False)
