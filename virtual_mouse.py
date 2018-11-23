@@ -38,38 +38,38 @@ pinchFlag=0
 
 while True:
 
-    ##PROPRETE DE LA RECONNAISSANCE DE COULEUR
+    ##PROPRIETE DE LA RECONNAISSANCE DE COULEUR
 
     ret, img = cam.read()
-    #On lit la webcam(l'image à chaque tour est dans img)
+    #On lit la webcam (l'image à chaque tour est dans img)
     img = cv2.resize(img, (340, 220))
-    #On donne une taille imposée au fenêtre
+    #On donne une taille imposée aux fenêtres
 
-    #On créé maintenant les différent mask pour l'image (un mask est une autre image (de meme dimension) avec du blanc
+    #On crée maintenant les différents mask pour l'image (un mask est une autre image (de même dimension) avec du blanc
     #là où la couleur est détéctée et du noir sur le reste)
     imgHSV = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
     #on convertit l'image de RGB en HSV
 
-    # On créé maintenant les différent mask pour l'image (un mask est une autre image (de meme dimension) avec du blanc
+    # On crée maintenant les différents mask pour l'image (un mask est une autre image (de même dimension) avec du blanc
     # là où la couleur est détéctée et du noir sur le reste)
 
     mask = cv2.inRange(imgHSV, lowerBound, upperBound)
-    #Premier mask qui détécte "betement" le vert
+    #Premier mask qui détécte "bêtement" le vert
     maskOpen = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernelOpen)
-    # maskOpen est le premier mask sur lequel on a retiré le bruit (càd les petits point random)
+    # maskOpen est le premier mask sur lequel on a retiré le bruit (càd les petits points random)
     maskClose = cv2.morphologyEx(maskOpen, cv2.MORPH_CLOSE, kernelClose)
-    # maskClose c'est maskOpen sur lequel les objets sont "remplis" (càd lorsqu'un objet à du bruit à l'intérieur (des
+    # maskClose c'est maskOpen sur lequel les objets sont "remplis" (càd lorsqu'un objet à du bruit à l'intérieur
 
     maskFinal = maskClose
     _,conts,h = cv2.findContours(maskFinal.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
     #conts c'est la liste des points du contour de chaque objet vert donc len(conts) c'est le lombre d'objets détéctés)
 
 
-    ##SI ON A DEUX CURSEUR => DEPLACEMENT DE LA SOURIS AU CENTRE
+    ##SI ON A DEUX CURSEURS => DEPLACEMENT DE LA SOURIS AU CENTRE
 
 
     if(len(conts)==2):
-        #deux curseur
+        #deux curseurs
         cx,cy = draw.drawcont(img,conts)
         #dessine les contours
 
@@ -84,7 +84,7 @@ while True:
         while mouse.position!=mouseLoc:
             pass
 
-    ##SI ON A UN CURSEUR => CLIC GAUCHE ENFONCER
+    ##SI ON A UN CURSEUR => CLIC GAUCHE ENFONCE
 
     elif(len(conts)==1):
         #un curseur
