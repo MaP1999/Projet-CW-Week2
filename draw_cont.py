@@ -1,9 +1,9 @@
 import cv2
-#Description: dessine les contours des curseurs et lorsqu'il y en a deux, une ligne rejoigannt les deux avec un point au centre
+#Description: dessine les contours des curseurs et lorsqu'il y en a deux, une ligne rejoignant les deux avec un point au centre
 #in: -img: flux de la vidéo
 #    -conts: les curseurs
 #out: cx,cy si 1 curseur = son centre
-#           si 2 curseur = millieu des deux
+#           si 2 curseur = milieu des deux
 def drawcont(img,conts):
     x=len(conts)
     if  x==1:
@@ -21,14 +21,14 @@ def drawcont(img,conts):
         x1,y1,w1,h1=cv2.boundingRect(conts[0])
         x2, y2, w2, h2 = cv2.boundingRect(conts[1])
         # renvoie, pour le plus petit rectangle "non penché" contenant tous les points des deux rectangles détectés,
-        # les cordonnées du coin inférieur gauche (x,y) et le couple (w,h) tel que (x+w,y+h) soit les cordonnées du coin
+        # les coordonnées du coin inférieur gauche (x,y) et le couple (w,h) tel que (x+w,y+h) soit les coordonnées du coin
         # supérieur droit
         cv2.rectangle(img, (x1, y1), (x1 + w1, y1 + h1), (255, 0, 0), 2)
         cv2.rectangle(img, (x2, y2), (x2 + w2, y2 + h2), (255, 0, 0), 2)
-        #Dessine les deux rectangles dans la couleur (0,0,255)
+        #Dessine les deux rectangles de couleur (0,0,255)
 
         # renvoie, pour le plus petit rectangle "non penché" contenant tous les points des deux rectangles détectés,
-        # les cordonnées du coin inférieur gauche (x,y) et le couple (w,h) tel que (x+w,y+h) soit les cordonnées du coin
+        # les cordonnées du coin inférieur gauche (x,y) et le couple (w,h) tel que (x+w,y+h) représente les coordonnées du coin
         # supérieur droit
 
         cx1=int(x1+w1/2)
